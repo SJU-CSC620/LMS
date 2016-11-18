@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118044216) do
+ActiveRecord::Schema.define(version: 20161118053702) do
 
   create_table "credentials", force: :cascade do |t|
-    t.string   "emailId"
     t.string   "userType"
     t.datetime "created_at"
     t.datetime "updated_at"
