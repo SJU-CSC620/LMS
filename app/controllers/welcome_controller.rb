@@ -19,6 +19,6 @@ class WelcomeController < ApplicationController
   end
   
   def displaycredentials
-    @details=Credential.all
+    @cred=Credential.all
   end
 end

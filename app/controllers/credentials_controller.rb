@@ -5,12 +5,13 @@ class CredentialsController < ApplicationController
   end
   def create
     @details = Credential.new(credentials_params)
+    @details.userType="user";
     # if Credential.find_by(loginId: "")
     #   flash[:notice] = "Username already exist"
     #   render 'signup'
     # end
     if @details.save
-      flash[:notice] = "Article was successfully created"
+      flash[:notice] = "Credential was successfully created"
       redirect_to root_path(@details)
     else
       render 'signup'
@@ -18,6 +19,6 @@ class CredentialsController < ApplicationController
   end
   private
   def credentials_params
-      params.require(:credential).permit(:loginId, :password)
+      params.require(:credential).permit(:loginId, :password,)
   end
 end
