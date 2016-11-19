@@ -24,8 +24,8 @@ class UsersController < ApplicationController
     end
   end
   
-  def show
-    
+  def userhome
+    #The user home after login Page
   end
   
   private

@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   
   #resources :credentials
   get 'signup' , to: 'users#signup'
-  resources :users, except: [:new]
+  resources :users, except: [:new,:show]
   
   get 'login' , to: 'sessions#new'
   post 'login' , to: 'sessions#create'
+  get '/users/:id' , to: 'users#userhome'
   delete 'logout', to: 'sessions#destroy'
 end
