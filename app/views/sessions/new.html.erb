@@ -1,0 +1,9 @@
+ <H2>Login here<h2>
+
+<%= form_for(:session , url: login_path) do |f| %>
+<%= f.label :username %>
+<%= f.text_field :username, placeholder: "Enter username", autofocus: true %>
+<%= f.label :password %>
+<%= f.password_field :password, autocomplete: "off" %>
+<%= f.submit "Log in" %>
+<% end %>

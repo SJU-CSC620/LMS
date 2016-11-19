@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root 'welcome#home'
   get 'signup' , to: 'users#signup'
   get 'displaycredentials' , to: 'welcome#displaycredentials'
-  resources :credentials
+  
+  #resources :credentials
   get 'signup' , to: 'users#signup'
   resources :users, except: [:new]
+  
+  get 'login' , to: 'sessions#new'
+  post 'login' , to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 end
