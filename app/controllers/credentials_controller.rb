@@ -19,6 +19,6 @@ class CredentialsController < ApplicationController
   end
   private
   def credentials_params
-      params.require(:credential).permit(:loginId, :password,)
+      params.require(:credential).permit(:fname, :lname, :email, :password,)
   end
 end

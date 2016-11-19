@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119012213) do
+ActiveRecord::Schema.define(version: 20161119021108) do
 
   create_table "credentials", force: :cascade do |t|
     t.string   "userType"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
+    t.string   "username"
     t.integer  "user_id"
     t.string   "password_digest"
   end
