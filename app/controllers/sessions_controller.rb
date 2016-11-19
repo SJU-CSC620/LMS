@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
 def new
+  redirect_to user_path(session[:user_id]) if logged_in?
 end
 def create
   cred = Credential.find_by(username: params[:session][:username].downcase)
   if cred && cred.authenticate(params[:session][:password])
-    session[:user_id] = cred.user
+    session[:user_id] = cred.user.id
     flash[:success] = "You have successfully logged in"
     redirect_to user_path(cred.user)
   else

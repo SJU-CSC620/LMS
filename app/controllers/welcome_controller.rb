@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def home
-    
+    redirect_to user_path(session[:user_id]) if logged_in?
   end
   def signup
     @details=Credential.new
