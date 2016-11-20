@@ -7,7 +7,11 @@ def create
   if cred && cred.authenticate(params[:session][:password])
     session[:user_id] = cred.user.id
     flash[:success] = "You have successfully logged in"
-    redirect_to user_path(cred.user)
+    if cred.userType=='user'
+      redirect_to user_path(cred.user)
+    else
+      redirect_to admin_path(cred.user)
+    end
   else
     flash.now[:danger] = "There was something wrong with your login information"
     render 'new'

@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_one :credential
-  
   before_save{self.email=email.downcase}
   validates :fname, presence: true, 
             length: {minimum: 3, maximum: 20, }

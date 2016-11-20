@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class AdminsController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
   before_action :set_user

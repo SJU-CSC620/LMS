@@ -1,0 +1,18 @@
+<%= link_to 'Home', root_path %>
+
+<H2>Edit profile here<h2>
+<p><%= link_to 'Edit password', edit_credential_path(@user)%></p>
+<%= form_for @user do |f| %>
+<p><%= f.label :fname ,'First Name' , autofocus: true%><br/>
+  <%= f.text_field :fname %>
+</p>
+<p><%= f.label :lname , 'Last Name' %><br/>
+  <%= f.text_field :lname %>
+</p>
+<p><%= f.label :email ,'Email'%><br/>
+  <%= f.email_field :email %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>
