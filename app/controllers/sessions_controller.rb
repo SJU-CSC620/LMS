@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 def new
-  redirect_to user_path(session[:user_id]) if logged_in?
+  redirect_to user_path(session[:user_id]) if logged_in? && Credential.find_by(user_id: session[:user_id]).userType=='user'
+  redirect_to admin_path(session[:user_id]) if logged_in? && Credential.find_by(user_id: session[:user_id]).userType=='admin'
 end
 def create
   cred = Credential.find_by(username: params[:session][:username].downcase)

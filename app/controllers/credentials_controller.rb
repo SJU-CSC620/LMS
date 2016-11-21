@@ -18,7 +18,11 @@ class CredentialsController < ApplicationController
           @usercred.password=params[:user][:newpassword]
           if @usercred.save
             flash[:success] = "Password successfully updated"
-            redirect_to user_path(@usercred.user)
+            if cred.userType=='user'
+              redirect_to user_path(@usercred.user)
+            else
+              redirect_to admin_path(@usercred.user)
+            end
           else
             flash.now[:danger] = @usercred.errors.full_messages
             render 'edit'

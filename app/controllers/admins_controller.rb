@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
   before_action :set_user
-  before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword]
+  before_action :require_user , only: [:edit,:adminhome,:editpassword, :updatepassword]
   before_action :require_same_user , only: [:edit,:editpassword]
   def signup
     @cred=Credential.new
@@ -35,29 +35,14 @@ class AdminsController < ApplicationController
   def update
     @user.update(users_params)
     if @user.save
-      flash[:success] = "Your profile has been successfully updated  "
-      redirect_to user_path(@user)
+      flash[:success] = "Admin profile has been successfully updated  "
+      redirect_to admin_path(@user.id)
     else
       render 'edit'
     end
   end
   
-  def editpassword
-    
-  end
-  def updatepassword
-  cred = Credential.find_by(user_id: params[:id])
-    if cred && cred.authenticate(params[:user][:password])
-      flash[:success] = "Authentication success"
-      redirect_to user_path(cred.user)
-    else
-    flash.now[:danger] = "Authentication failed"
-    render 'editpassword'
-    end
-  end
-  
-  
-  def userhome
+  def adminhome
     #The user home after login Page
   end
   

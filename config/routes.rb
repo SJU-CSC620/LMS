@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'signup' , to: 'users#signup'
   resources :users, except: [:new,:show]
   #resources :credentials
+  resources :admins, except: [:new,:show]
+
+  get '/admins/:id' , to: 'admins#adminhome'
   patch 'credentials/:id' , to: 'credentials#update'
   
   get 'login' , to: 'sessions#new'

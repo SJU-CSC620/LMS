@@ -1,7 +1,7 @@
 <% if logged_in?%>
 <p><%= link_to 'Log out', logout_path, method: :delete %><p/>
-<p><%= link_to 'Edit Profile', edit_user_path(@user)%></p>
+<p><%= link_to 'Edit Profile', edit_admin_path(@user)%></p>
 Hello <%= current_user.fname%>
 <%else%>
-<%= link_to 'login', login_path, method: :delete%><p/>
+<% redirect_to login_path%>
 <%  end%>

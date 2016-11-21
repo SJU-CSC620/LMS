@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
-  before_action :set_user
+  before_action :set_user, except:[:signup, :create]
   before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword]
   before_action :require_same_user , only: [:edit,:editpassword]
   def signup
@@ -36,23 +36,13 @@ class UsersController < ApplicationController
     @user.update(users_params)
     if @user.save
       flash[:success] = "Your profile has been successfully updated  "
-      redirect_to user_path(@user)
+      if Credential.find_by(user_id: @user.id).userType=='user'
+        redirect_to user_path(@user)
+      else
+        redirect_to admin_path(@user)
+      end
     else
       render 'edit'
-    end
-  end
-  
-  def editpassword
-    
-  end
-  def updatepassword
-  cred = Credential.find_by(user_id: params[:id])
-    if cred && cred.authenticate(params[:user][:password])
-      flash[:success] = "Authentication success"
-      redirect_to user_path(cred.user)
-    else
-    flash.now[:danger] = "Authentication failed"
-    render 'editpassword'
     end
   end
   
@@ -76,7 +66,7 @@ class UsersController < ApplicationController
   
   def require_same_user
     if current_user != @user
-      flash[:danger] = "You can only edit or delete your own articles"
+      flash[:danger] = "You can only edit your profile"
       redirect_to root_path
     end
   end
