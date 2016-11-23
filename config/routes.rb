@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get '/admins/:id' , to: 'admins#adminhome'
   patch 'credentials/:id' , to: 'credentials#update'
   
+  resources :books
+  get '/books/:id/new', to: 'books#create'
+    
   get 'login' , to: 'sessions#new'
   post 'login' , to: 'sessions#create'
   get '/users/:id' , to: 'users#userhome'
