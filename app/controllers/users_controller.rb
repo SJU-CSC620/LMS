@@ -51,7 +51,8 @@ class UsersController < ApplicationController
   end
   
   def viewBooks
-    @book=Book.find_by(status: @user.id)
+    # update the below to display current borrowed books
+    @booksBorrowed=Booklog.find_by(user_id: @user.id)
   end
   
   def userhome

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123054825) do
+ActiveRecord::Schema.define(version: 20161127063951) do
+
+  create_table "booklogs", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "borrowed", null: false
+    t.datetime "returned"
+    t.index ["book_id"], name: "index_booklogs_on_book_id"
+    t.index ["user_id"], name: "index_booklogs_on_user_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
