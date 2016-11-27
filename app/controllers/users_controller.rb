@@ -60,11 +60,11 @@ class UsersController < ApplicationController
     @keyWord=params['keyWord'];
     @searchtype=params['searchtype'];
     if(@searchtype=="title")
-        @books=Book.where('title LIKE ?',@keyWord)
+        @books=Book.where('title LIKE ?',"%#{@keyWord}%")
       elsif(@searchtype=="author")
-        @books=Book.where('author LIKE ?',@keyWord)
+        @books=Book.where('author LIKE ?',"%#{@keyWord}%")
       else
-        @books=Book.where('category LIKE ?',@keyWord)
+        @books=Book.where('category LIKE ?', "%#{@keyWord}%")
     end
   end
   def userhome
