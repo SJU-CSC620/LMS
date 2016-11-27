@@ -55,6 +55,18 @@ class UsersController < ApplicationController
     @booksBorrowed=Booklog.find_by(user_id: @user.id)
   end
   
+  def results
+    # update the below to display search results
+    @keyWord=params['keyWord'];
+    @searchtype=params['searchtype'];
+    if(@searchtype=="title")
+        @books=Book.where('title LIKE ?',@keyWord)
+      elsif(@searchtype=="author")
+        @books=Book.where('author LIKE ?',@keyWord)
+      else
+        @books=Book.where('category LIKE ?',@keyWord)
+    end
+  end
   def userhome
     #The user home after login Page
   end

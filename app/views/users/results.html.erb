@@ -1,0 +1,27 @@
+<% if logged_in?%>
+<%= link_to 'Home', user_path %>
+<p><%= link_to 'Log out', logout_path, method: :delete %><p/>
+<p><%= link_to 'Edit Profile', edit_user_path(@user)%></p>
+<p><%= link_to 'Back', search_user_path(@user.id)%></p>
+ <h2><em>Search Results for: </em><%= @searchtype%> <font size=6>"<%= @keyWord%>"</font></h2>
+ <%if !@books.empty?%>
+ <table>
+    <tr>
+  		<th>Book Name</th>
+	    <th>Author</th>
+	    <th>availability</th>
+  </tr>
+ <% @books.each do |venue| %>
+ <tr>
+ <td> <%= venue.title %></td>
+  <td><%= venue.author %></td>
+  <td><%= venue.status %></td>
+  </tr>
+<% end %>
+</table>
+  <%else%>
+  No Results found
+ <%end%>
+<%else%>
+<% redirect_to login_path%>
+<%  end%>
