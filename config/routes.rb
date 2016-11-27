@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :credentials
   get 'signup' , to: 'users#signup'
   resources :users, except: [:new,:show]
+  get 'users/:id/search' , to: 'users#search' , as: 'search_user'
+  get 'users/:id/viewBooks' , to: 'users#viewBooks' , as: 'viewBooks_user'
   #resources :credentials
   resources :admins, except: [:new,:show]
 
@@ -21,8 +23,7 @@ Rails.application.routes.draw do
   get 'login' , to: 'sessions#new'
   post 'login' , to: 'sessions#create'
   get '/users/:id' , to: 'users#userhome'
-  
-  
+
   # patch 'users/editpassword/:id' , to: 'users#updatepassword'
   # put 'users/editpassword/:id' , to: 'users#updatepassword'
   #post '/credentials/:id/edit' , to: 'credentials#edit'

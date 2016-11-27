@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :credential
+  has_and_belongs_to_many :books
   before_save{self.email=email.downcase}
   validates :fname, presence: true, 
             length: {minimum: 3, maximum: 20, }

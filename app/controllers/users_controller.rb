@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
   before_action :set_user, except:[:signup, :create]
-  before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword]
-  before_action :require_same_user , only: [:edit,:editpassword]
+  before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword, :viewBooks]
+  before_action :require_same_user , only: [:edit,:editpassword, :viewBooks]
   def signup
     @cred=Credential.new
     @user=User.new
@@ -46,6 +46,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def search
+    
+  end
+  
+  def viewBooks
+    @book=Book.find_by(status: @user.id)
+  end
   
   def userhome
     #The user home after login Page
