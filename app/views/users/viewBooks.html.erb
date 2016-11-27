@@ -2,10 +2,30 @@
 <%= link_to 'Home', user_path %>
 <p><%= link_to 'Log out', logout_path, method: :delete %><p/>
 <p><%= link_to 'Edit Profile', edit_user_path(@user)%></p>
- <%if !@booksBorrowed.nil?%>
-  <%else%>
+<%if !@borrowedlog.empty?%>
+  <table>
+    <tr>
+      <th>Book Name</th>
+	    <th>Author</th>
+    </tr>
+  <% @borrowedlog.each do |bookborrowed| 
+    book=Book.find(bookborrowed.book_id)
+    %>
+    <tr>
+      <td> <%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= link_to 'Return Book',
+            {controller: 'users',
+             action: 'returnbook',
+             id: @user,
+             booklogid: bookborrowed},
+            class: 'button' %></td>
+    </tr>
+  <% end %>
+  </table>
+<%else%>
   No pending Books 
- <%end%>
+<%end%>
 
 <%else%>
 <% redirect_to login_path%>

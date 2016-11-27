@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
   before_action :set_user, except:[:signup, :create]
-  before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword, :viewBooks]
-  before_action :require_same_user , only: [:edit,:editpassword, :viewBooks]
+  before_action :require_user , only: [:edit,:userhome,:editpassword, :updatepassword, :viewBooks, :selectbook , :returnbook]
+  before_action :require_same_user , only: [:edit,:editpassword, :viewBooks , :selectbook, :returnbook]
   def signup
     @cred=Credential.new
     @user=User.new
@@ -47,12 +47,13 @@ class UsersController < ApplicationController
   end
   
   def search
-    
+  
   end
   
   def viewBooks
     # update the below to display current borrowed books
-    @booksBorrowed=Booklog.find_by(user_id: @user.id)
+    @borrowedlog=Booklog.where("user_id = ? AND returned IS ?", @user.id, nil)
+    # @booksBorrowed=Booklog.find_by(user_id: @user.id)
   end
   
   def results
@@ -67,6 +68,27 @@ class UsersController < ApplicationController
         @books=Book.where('category LIKE ?', "%#{@keyWord}%")
     end
   end
+  
+  def selectbook
+    @book=Book.find(params[:bookid])
+    @book.status="unavailable"
+    @book.save
+    @booklog=Booklog.create(user_id: @user.id, book_id: @book.id, borrowed: Time.now)
+    flash[:notice] = "Book Added"
+    redirect_to user_path(@user)
+  end
+  
+  def returnbook
+    @booklog=Booklog.find(params[:booklogid])
+    @booklog.returned=Time.now
+    @booklog.save
+    @book=Book.find(@booklog.book_id)
+    @book.status="available"
+    @book.save
+    flash[:notice] = "Book Returned"
+    redirect_to user_path(@user)
+  end
+  
   def userhome
     #The user home after login Page
   end

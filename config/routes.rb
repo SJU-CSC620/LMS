@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'users/:id/search' , to: 'users#search' , as: 'search_user'
   get 'users/:id/viewBooks' , to: 'users#viewBooks' , as: 'viewBooks_user'
   get 'users/:id/results' , to: 'users#results' , as: 'results_user'
+  get '/users/:id/:bookid' => 'users#selectbook', :as => :selectbook
+  get '/users/:id/:booklogid/returnbook' => 'users#returnbook', :as => :returnbook
   #resources :credentials
   resources :admins, except: [:new,:show]
 

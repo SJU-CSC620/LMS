@@ -11,11 +11,24 @@
 	    <th>Author</th>
 	    <th>availability</th>
   </tr>
- <% @books.each do |venue| %>
+ <% @books.each do |book| %>
  <tr>
- <td> <%= venue.title %></td>
-  <td><%= venue.author %></td>
-  <td><%= venue.status %></td>
+ <td> <%= book.title %></td>
+  <td><%= book.author %></td>
+  <td><%= book.status %></td>
+  <% if book.status== 'available'%>
+    <td><%= link_to 'Add Book',
+            {controller: 'users',
+             action: 'selectbook',
+             id: @user,
+             bookid: book},
+            class: 'button' %></td>
+  <%else
+    booklog=Booklog.find_by(book_id: book.id)
+    if(booklog.user_id==@user.id)%>
+    <td>Already selected</td>
+    <%end%>
+  <%end%>
   </tr>
 <% end %>
 </table>
