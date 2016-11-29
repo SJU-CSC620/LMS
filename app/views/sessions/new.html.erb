@@ -1,10 +1,15 @@
-<%= link_to 'Home', root_path %></br>
- <h2>Login here</h2>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      
+      <h2>Login here</h2>
 
-<%= form_for(:session , url: login_path) do |f| %>
-<%= f.label :username %>
-<%= f.text_field :username, placeholder: "Enter username", autofocus: true %>
-<%= f.label :password %>
-<%= f.password_field :password, autocomplete: "off" %>
-<%= f.submit "Log in" %>
-<% end %>
+        <%= form_for(:session , url: login_path) do |f| %>
+        <%= f.label :username %>
+        <%= f.text_field :username, placeholder: "Enter username", autofocus: true, class: 'form-control' %>
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off" , class: 'form-control'%></br>
+        <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
+        <% end %>
+
+    </div>
+</div>

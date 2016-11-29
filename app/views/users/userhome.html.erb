@@ -1,9 +1,22 @@
 <% if logged_in?%>
-<p><%= link_to 'Log out', logout_path, method: :delete %><p/>
-<p><%= link_to 'Edit Profile', edit_user_path(@user)%></p>
-<p><%= link_to 'search Book', search_user_path(@user.id)%></p>
-<p><%= link_to 'view Book', viewBooks_user_path(@user.id)%></p>
-Hello <%= current_user.fname%>
+<strong></Bold>Hello <%= current_user.fname%></strong></br></br>
+
+<div class="btn-group float_btn" role="group">
+<p><%= link_to 'Log out', logout_path, class: "btn btn-xlg btn-info", method: :delete %><p/>
+</div>
+
+<div class="btn-group float_btn" role="group">
+<p><%= link_to 'Edit Profile', edit_user_path(@user) , class: "btn btn-xlg btn-info"%></p>
+</div>
+
+<div class="btn-group float_btn" role="group">
+<p><%= link_to 'search Book', search_user_path(@user.id), class: "btn btn-xlg btn-info"%></p>
+</div>
+
+<div class="btn-group float_btn" role="group">
+<p><%= link_to 'view Book', viewBooks_user_path(@user.id), class: "btn btn-xlg btn-info"%></p>
+</div>
+
 <%else%>
 <% redirect_to login_path%>
 <%  end%>

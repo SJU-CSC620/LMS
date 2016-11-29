@@ -1,16 +1,21 @@
 <% if logged_in?%>
-<%= link_to 'Home', user_path %>
-<p><%= link_to 'Log out', logout_path, method: :delete %><p/>
-<p><%= link_to 'Edit Profile', edit_user_path(@user)%></p>
+<p><%= link_to 'Back', user_path %> |
+<%= link_to 'Log out', logout_path, method: :delete %> |
+<%= link_to 'Edit Profile', edit_user_path(@user)%></p>
 <%if !@borrowedlog.empty?%>
-  <table>
+  <table class="table">
+    <thead>
     <tr>
       <th>Book Name</th>
 	    <th>Author</th>
+	    <th colspan="3"></th>
     </tr>
+    </thead>
   <% @borrowedlog.each do |bookborrowed| 
     book=Book.find(bookborrowed.book_id)
     %>
+    
+<tbody>
     <tr>
       <td> <%= book.title %></td>
       <td><%= book.author %></td>
@@ -20,9 +25,10 @@
              id: @user,
              booklogid: bookborrowed},
             class: 'button' %></td>
-    </tr>
   <% end %>
-  </table>
+  </tr>
+  </tbody>
+    </table>
 <%else%>
   No pending Books 
 <%end%>
