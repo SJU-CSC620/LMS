@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       @cred=Credential.new(user: @user, username: @user.username , password: params[:password], userType: 'user')
       @user.save
       @cred.save
-      flash[:notice] = "Account successfully created"
+      flash[:success] = "Account successfully created"
       redirect_to root_path(@user)
     else
       render 'signup'
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     @book.status="unavailable"
     @book.save
     @booklog=Booklog.create(user_id: @user.id, book_id: @book.id, borrowed: Time.now)
-    flash[:notice] = "Book Added"
+    flash[:success] = "Book Added"
     redirect_to user_path(@user)
   end
   
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     @book=Book.find(@booklog.book_id)
     @book.status="available"
     @book.save
-    flash[:notice] = "Book Returned"
+    flash[:success] = "Book Returned"
     redirect_to user_path(@user)
   end
   

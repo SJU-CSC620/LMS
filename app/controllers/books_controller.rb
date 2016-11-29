@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     @book = Book.new(books_params)
     if @book.valid?
       @book.save
-      flash[:notice] = "Book successfully created"
+      flash[:success] = "Book successfully created"
       redirect_to root_path
     else
       render 'new'
