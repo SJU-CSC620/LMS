@@ -59,6 +59,10 @@ class UsersController < ApplicationController
   def results
     # update the below to display search results
     @keyWord=params['keyWord'];
+    if(@keyWord=='')
+    flash[:success] = "Enter a keyword to search"
+    redirect_to search_user_path(@user)
+    end
     @searchtype=params['searchtype'];
     if(@searchtype=="title")
         @books=Book.where('title LIKE ?',"%#{@keyWord}%")
