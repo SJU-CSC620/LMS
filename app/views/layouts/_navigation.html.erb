@@ -44,9 +44,9 @@
           </ul>
         </li>
       <%end%>
-      <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+      <li><%= link_to 'Log out', logout_path, method: :delete , class: "navbar-brand", style: "color: #ffffff" %></li>
       <%else%>
-      <li><%= link_to 'Log in', login_path %></li>
+      <li><%= link_to 'Log in', login_path, class: "navbar-brand", style: "color: #ffffff" %></li>
       <%end%>
       </ul>
   </div><!-- /.container-fluid -->
