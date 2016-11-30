@@ -1,0 +1,24 @@
+<br>
+<%= form_for(@book) do |f| %>
+  <%= render 'shared/errors', obj: @book %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_field :author %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.text_field :category %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, ["--Select--",'available', 'Coming Soon']%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

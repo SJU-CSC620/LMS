@@ -46,6 +46,36 @@ class AdminsController < ApplicationController
     #The user home after login Page
   end
   
+  def search
+  
+  end
+  def results
+    # update the below to display search results
+    @keyWord=params['keyWord'];
+    if(@keyWord=='')
+    flash[:success] = "Enter a keyword to search"
+    redirect_to search_user_path(@user)
+    end
+    @searchtype=params['searchtype'];
+    if(@searchtype=="title")
+        @books=Book.where('title LIKE ?',"%#{@keyWord}%")
+      elsif(@searchtype=="author")
+        @books=Book.where('author LIKE ?',"%#{@keyWord}%")
+      else
+        @books=Book.where('category LIKE ?', "%#{@keyWord}%")
+    end
+  end
+  def viewBooks
+    # update the below to display current borrowed books
+    @borrowedlog=Booklog.where("user_id = ? AND returned IS ?", @user.id, nil)
+    # @booksBorrowed=Booklog.find_by(user_id: @user.id)
+  end
+  def editbook
+    @book=Book.find(params[:id])
+  end
+  def deletebook
+    
+  end
   private
     def users_params
         params.require(:user).permit(:fname, :lname, :email, :username)

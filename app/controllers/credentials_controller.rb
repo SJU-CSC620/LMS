@@ -1,6 +1,7 @@
 class CredentialsController < ApplicationController
   attr_accessor  :password, :newpassword, :repeatnewpassword
   before_action :set_user, except:[:edit, :update]
+  before_action :require_user
   def edit
     @user =User.find(params[:id])
     @cred=Credential.find_by(user_id: params[:id])
@@ -44,5 +45,10 @@ class CredentialsController < ApplicationController
 def set_user
     @user = User.find(params[:id])
 end
-
+def require_same_user
+    if current_user != @user
+      flash[:danger] = "You can only edit your profile"
+      redirect_to root_path
+    end
+end
 end

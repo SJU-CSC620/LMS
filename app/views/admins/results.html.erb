@@ -1,0 +1,44 @@
+<% if logged_in?%>
+
+<%= link_to 'Back', search_admin_path(@user)%></p>
+
+ <h2><em>Search Results for: </em><%= @searchtype%> <font size=6>"<%= @keyWord%>"</font></h2>
+ <%if !@books.empty?%>
+ <table class="table">
+     
+    <thead>
+    <tr>
+      <th>Book ID</th>
+  		<th>Book Name</th>
+	    <th>Author</th>
+	    <th>availability</th>
+	    
+	    <th colspan="3"></th>
+  </tr>
+  </thead>
+  
+ <% @books.each do |book| %>
+ <tbody>
+ 
+ <tr>
+  <td> <%= book.id %></td>
+ <td> <%= book.title %></td>
+  <td><%= book.author %></td>
+  <td><%= book.status %></td>
+    <td><%= link_to 'Edit', edit_book_path(book) %> ||
+    <%= link_to 'Delete Book',
+            {controller: 'admins',
+             action: 'deletebook',
+             id: @user,
+             bookid: book},
+            class: 'button' %></td>
+<% end %>
+</tr>
+</tbody>
+</table>
+  <%else%>
+  No Results found
+ <%end%>
+<%else%>
+<% redirect_to login_path%>
+<%  end%>

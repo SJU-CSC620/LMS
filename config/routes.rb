@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :admins, except: [:new,:show]
 
   get '/admins/:id' , to: 'admins#adminhome'
+  get 'admins/:id/search' , to: 'admins#search' , as: 'search_admin'
+  get 'admins/:id/results' , to: 'admins#results' , as: 'results_admin'
+  get '/admins/:id/:bookid' => 'admins#editbook', :as => :editbook
+  get '/admins/:id/:bookid' => 'admins#deletebook', :as => :deletebook
   patch 'credentials/:id' , to: 'credentials#update'
   
   resources :books

@@ -1,0 +1,26 @@
+<% if logged_in?%>
+<p><%= link_to 'Back', user_path %> |
+<%= link_to 'Log out', logout_path, method: :delete %> |
+<%= link_to 'Edit Profile', edit_admin_path(@user)%></p>
+
+<div class='row'>
+    <div class='col-xs-12'>
+          
+<%= form_tag(results_admin_path, method: "get") do %>
+      <%= label_tag(:q, "Keyword:") %>
+      <%= text_field_tag(:keyWord) %><br>
+      <%= radio_button_tag(:searchtype, "title", checked = true) %>
+      <%= label_tag(:title, "Book Title") %>
+      <%= radio_button_tag(:searchtype, "author") %>
+      <%= label_tag(:author, "Author") %>
+      <%= radio_button_tag(:searchtype, "category" ) %>
+      <%= label_tag(:category, "category" ) %></br>
+      <%= submit_tag("Search")%>
+<% end %>
+<%else%>
+<% redirect_to login_path%>
+<%  end%>
+
+      </div>
+
+</div>
