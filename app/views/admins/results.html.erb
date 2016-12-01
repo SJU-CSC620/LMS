@@ -25,13 +25,9 @@
  <td> <%= book.title %></td>
   <td><%= book.author %></td>
   <td><%= book.status %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %> ||
-    <%= link_to 'Delete Book',
-            {controller: 'admins',
-             action: 'deletebook',
-             id: @user,
-             bookid: book},
-            class: 'button' %></td>
+    <td><%= link_to 'Edit', edit_book_path(book) %> |
+    <%= link_to 'Delete Book', book,controller: :book , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
 <% end %>
 </tr>
 </tbody>

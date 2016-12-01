@@ -40,6 +40,13 @@ class BooksController < ApplicationController
         render 'edit'
       end
   end
+  def destroy
+    # @book=Book.find(params[:id])
+    Book.delete(params[:id])
+    flash[:success] = "Book successfully Deleted"
+    redirect_to root_path
+  end
+  
   private
     def books_params
         params.require(:book).permit(:title, :author, :category, :status)
