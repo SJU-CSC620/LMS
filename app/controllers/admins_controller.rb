@@ -76,6 +76,61 @@ class AdminsController < ApplicationController
   def deletebook
     
   end
+  def searchuser
+    
+  end
+  def userresults
+    @keyWord=params['keyWord'];
+    if(@keyWord=='')
+    flash[:success] = "Enter a keyword to search"
+    redirect_to searchuser_admin_path(@user)
+    end
+    @searchtype=params['searchtype'];
+    if(@searchtype=="fname")
+        @users=User.where('fname LIKE ?',"%#{@keyWord}%")
+      elsif(@searchtype=="lname")
+        @users=User.where('lname LIKE ?',"%#{@keyWord}%")
+      else
+        @users=User.where('username LIKE ?', "%#{@keyWord}%")
+    end
+  end
+  def resetpassword
+    @cred=Credential.find_by(user_id: params[:id])
+    @cred.password=@cred.username
+    if @cred.save
+      flash[:success] = "Password Reset successfull"
+        redirect_to admin_path
+    end
+  end
+  def recreateuser
+    @user = User.find(params[:id])
+    @cred=Credential.new(user: @user, username: @user.username , password: @user.username, userType: 'user')
+    if @cred.save
+      flash[:success] = "Account successfully recreated"
+        redirect_to admin_path
+    end
+  end
+  def createuser
+    @cred=Credential.new
+    @user=User.new
+  end
+  def saveuser
+    @user = User.new(users_params)
+    @cred=Credential.new(user: @user, username: @user.username , password: @user.username , userType: params[:user][:userType])
+    @userType="user";
+    # if Credential.find_by(loginId: "")
+    #   flash[:notice] = "Username already exist"
+    #   render 'signup'
+    # end
+    if @user.valid? && @cred.valid?
+      @user.save
+      @cred.save
+      flash[:success] = "Account successfully created"
+      redirect_to admin_path
+    else
+      render 'createuser'
+    end
+  end
   private
     def users_params
         params.require(:user).permit(:fname, :lname, :email, :username)

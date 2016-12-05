@@ -1,0 +1,54 @@
+
+
+
+<%if @user.errors.any? || @cred.errors.any?%>
+  <h2>The following errors prevented the article from getting created</h2>
+<%end%>  
+<% if @user.errors.any? %>
+<ul>
+  <% @user.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @cred.errors.any? %>
+<ul>
+  <% @cred.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+ 
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    
+<%= link_to 'Back', root_path %>
+
+<%= form_for @user , :url => saveuser_admin_path do |f| %>
+<%= f.label :fname ,'First Name' , autofocus: true%><br/>
+  <%= f.text_field :fname, class: 'form-control'  %>
+</br>
+
+<%= f.label :lname , 'Last Name' %><br/>
+  <%= f.text_field :lname, class: 'form-control'  %>
+</br>
+
+<%= f.label :email ,'Email'%><br/>
+  <%= f.email_field :email, class: 'form-control'  %>
+</br>
+
+  <%= f.label :username , 'Username'%><br/>
+  <%= f.text_field :username, class: 'form-control'  %>
+</br>
+
+<%= f.label :userType ,'User Type'%><br/>
+<%= f.select :userType, [['User Type','select'],['Admin','admin'],['User','user']] , class: "btn btn-primary btn-block" %>
+</br>  </br>  
+
+  <%= f.submit "Create" , class: "btn btn-primary btn-block" %>
+
+<% end %>
+
+ </div>
+</div>

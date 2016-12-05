@@ -1,6 +1,6 @@
 class CredentialsController < ApplicationController
   attr_accessor  :password, :newpassword, :repeatnewpassword
-  before_action :set_user, except:[:edit, :update]
+  before_action :set_user, except:[:edit, :update, :destroy]
   before_action :require_user
   def edit
     @user =User.find(params[:id])
@@ -19,9 +19,9 @@ class CredentialsController < ApplicationController
           if @cred.save
             flash[:success] = "Password successfully updated"
             if @cred.userType=='user'
-              redirect_to user_path(@usercred.user)
+              redirect_to user_path(@user)
             else
-              redirect_to admin_path(@usercred.user)
+              redirect_to admin_path(@user)
             end
           else
             errormsg=""
@@ -41,6 +41,11 @@ class CredentialsController < ApplicationController
     redirect_to edit_credential_path(@user)
     end
     
+  end
+  def destroy
+    Credential.delete(params[:id])
+    flash[:success] = "User successfully Deleted"
+    redirect_to root_path
   end
 def set_user
     @user = User.find(params[:id])
