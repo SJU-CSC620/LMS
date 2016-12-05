@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   #check for session before direction to pages
   #before_action :set_cred, only:[:editpassword]
-  before_action :set_user, except: [:new, :create, :edit, :update]
+  before_action :set_user, except: [:new, :create, :edit, :update,:destroy]
   before_action :require_user , except: [:new, :create, :edit, :update]
 
   def index
