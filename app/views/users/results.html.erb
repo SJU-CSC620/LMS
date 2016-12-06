@@ -34,7 +34,7 @@
             class: 'button' %></td>
   <%else
     booklog=Booklog.find_by(book_id: book.id)
-    if(booklog.user_id==@user.id)%>
+    if(!booklog.nil? && booklog.user_id==@user.id)%>
     <td>Already selected</td>
     <%end%>
   <%end%>
